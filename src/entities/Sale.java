@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Sale {
 	
@@ -64,6 +65,26 @@ public class Sale {
 		return total / items;
 	}
 	
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(items, month, seller, total, year);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sale other = (Sale) obj;
+		return Objects.equals(items, other.items) && Objects.equals(month, other.month)
+				&& Objects.equals(seller, other.seller) && Objects.equals(total, other.total)
+				&& Objects.equals(year, other.year);
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

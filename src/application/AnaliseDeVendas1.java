@@ -44,9 +44,11 @@ public class AnaliseDeVendas1 {
 					.map(p -> p.averagePrice())
 					.reduce(0.0, (x,y) -> x+y ) / list.size();
 					
+			Comparator<String> comp = (s1,s2) -> s1.compareTo(s2);
 			List<String> vendas = list.stream()
-					.filter(x -> x.averagePrice() > avg && x.getYear()==2016)
+					.filter(x -> x.getYear()==2016 && x.averagePrice() > avg)
 					.map(x -> x.toString())
+					.sorted(comp.reversed())
 					.limit(5)
 					.collect(Collectors.toList());
 			
