@@ -39,20 +39,15 @@ public class AnaliseDeVendas1 {
 				line = br.readLine();
 				
 			}
+				
+			//Comparator<Sale> comp = (s1,s2) -> s1.averagePrice().compareTo(s2.averagePrice());
 			
-			double avg = list.stream()
-					.map(p -> p.averagePrice())
-					.reduce(0.0, (x,y) -> x+y ) / list.size();
-					
-			Comparator<String> comp = (s1,s2) -> s1.compareTo(s2);
-			List<String> vendas = list.stream()
-					.filter(x -> x.getYear()==2016 && x.averagePrice() > avg)
-					.map(x -> x.toString())
-					.sorted(comp.reversed())
+			List<Sale> vendas = list.stream()
+					.filter(x -> x.getYear()==2016 )
 					.limit(5)
+					.sorted((s1,s2) -> s2.averagePrice().compareTo(s1.averagePrice()))
 					.collect(Collectors.toList());
-			
-			
+
 			System.out.println();
 			System.out.println("Cinco primeiras vendas de 2016 de maior preço médio");
 			vendas.forEach(System.out::println);
